@@ -1,0 +1,79 @@
+<div class="container mt-3">
+    <button class="btn btn-success" data-toggle="modal" data-target="#AddProduct">
+        Add product
+    </button>
+        
+            <div class="item" class="col-12">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    <tbody *ngFor="let item of products;">
+                    
+                <tr class="product-link" routerLink="/details/{{item.id}}">
+                   <td> <img src="{{item.image}}" alt=""></td>
+                
+                       <td>{{item.title}}</td>
+                       <td>{{item.category}}</td>
+                        <td>{{item.price}}</td>
+                </tr>
+        
+            </tbody>
+            </table>
+            </div>
+        </div>
+   
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="AddProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] ="form">
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <label for="">Title</label>
+                <input type="text" formControlName="title" class="form-control" placeholder="title">
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <label for="">Price</label>
+                <input type="number" formControlName="price" class="form-control" placeholder="price">
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <app-select [data]="category" [title]="'Categories'" (selectdata)="SetCategory($event)"></app-select>
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <label for="image">Image</label>
+                <img src="{{base64}}" alt="">
+                <input type="file" class="form-control"  (change)="convertToBase64($event)">>
+              </div>
+              <div class="col-md-8 col-sm-12">
+                <label for="image">Description</label>
+                <textarea class="form-control" formControlName="description" placeholder="typr here ..."></textarea>
+              </div>
+            </div>
+<div class="d-flex justify-content-end mt-3">
+  <button class="btn btn-success" [disabled]="!form.valid" (click)="AddProduct()">Add Product</button>
+</div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
